@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 340" role="img" aria-labelledby="title desc">
+  <title id="title">GiveHope</title>
+  <desc id="desc">GiveHope — Donate, Support, Make an Impact</desc>
+  <defs>
+    <linearGradient id="heart" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffad00"/><stop offset="1" stop-color="#ff4b29"/></linearGradient>
+    <linearGradient id="hands" x1="0" x2="1"><stop stop-color="#0b3c74"/><stop offset="1" stop-color="#0758a0"/></linearGradient>
+    <linearGradient id="grass" x1="0" x2="1"><stop stop-color="#41a916"/><stop offset="1" stop-color="#70c915"/></linearGradient>
+  </defs>
+  <path fill="url(#heart)" d="M174 212C145 186 31 114 39 66 45 22 101 4 139 31l35 27 34-27c39-29 97-10 102 35 6 49-108 122-136 146Z"/>
+  <g fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="174" cy="78" r="13" stroke="none"/>
+    <path d="M174 96v65m0-48-42-36m42 36 42-36m-42 84-18 32m18-32 18 32" fill="none" stroke-width="11"/>
+    <circle cx="105" cy="111" r="10" stroke="none"/><path d="m105 126 0 37m0-27-29-18m29 18 25-18m-25 45-12 18m12-18 12 18" fill="none" stroke-width="8"/>
+    <circle cx="244" cy="111" r="10" stroke="none"/><path d="m244 126 0 37m0-27-25-18m25 18 29-18m-29 45-12 18m12-18 12 18" fill="none" stroke-width="8"/>
+  </g>
+  <path fill="url(#hands)" d="M20 178c22-15 39 2 49 16l30 39c8 10 22 16 38 18-24-15-47-35-62-52-10-12 2-27 15-21l62 37c7 4 14 5 22 3l-2 76-59-2c-28-1-48-10-66-29l-36-42c-10-12-8-31 9-43Zm304 0c-22-15-39 2-49 16l-30 39c-8 10-22 16-38 18 24-15 47-35 62-52 10-12-2-27-15-21l-62 37c-7 4-14 5-22 3l2 76 59-2c28-1 48-10 66-29l36-42c10-12 8-31-9-43Z"/>
+  <path d="M18 314c63-23 117-22 157-6 40-16 94-17 157 6-55-5-104 4-157 19-53-15-102-24-157-19Z" fill="url(#grass)"/>
+  <text x="365" y="190" font-family="Arial,Helvetica,sans-serif" font-size="158" font-weight="800" letter-spacing="-8" fill="#0b3c74">Give</text>
+  <text x="685" y="190" font-family="Arial,Helvetica,sans-serif" font-size="158" font-weight="800" letter-spacing="-8" fill="#45a913">Hope</text>
+  <text x="372" y="270" font-family="Arial,Helvetica,sans-serif" font-size="45" font-style="italic" font-weight="600" fill="#0b3c74">Donate</text>
+  <circle cx="560" cy="255" r="10" fill="#ff8b00"/>
+  <text x="584" y="270" font-family="Arial,Helvetica,sans-serif" font-size="45" font-style="italic" font-weight="600" fill="#0b3c74">Support</text>
+  <circle cx="777" cy="255" r="10" fill="#ff8b00"/>
+  <text x="801" y="270" font-family="Arial,Helvetica,sans-serif" font-size="45" font-style="italic" font-weight="600" fill="#0b3c74">Make an Impact</text>
+</svg>

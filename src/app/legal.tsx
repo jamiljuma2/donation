@@ -1,0 +1,1 @@
+export function Legal({title,sections}:{title:string;sections:[string,string][]}){return <main className="wrap section" style={{maxWidth:850}}><div className="eyebrow">Platform information</div><h1>{title}</h1>{sections.map(([h,p])=><section key={h}><h2>{h}</h2><p className="muted" style={{lineHeight:1.8}}>{p}</p></section>)}</main>}

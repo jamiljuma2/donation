@@ -1,0 +1,2 @@
+import {createHash} from 'crypto';import {supabaseAdmin} from './supabase/server';import {NextRequest} from 'next/server';
+export async function rateAllowed(req:NextRequest,scope:string,max:number,seconds:number){const db=supabaseAdmin();if(!db)return false;const ip=req.headers.get('x-real-ip')||req.headers.get('cf-connecting-ip')||'unknown';const key=createHash('sha256').update(`${scope}:${ip}`).digest('hex');const{data,error}=await db.rpc('consume_rate_limit',{p_key_hash:key,p_max:max,p_window_seconds:seconds});return !error&&data===true;}

@@ -1,0 +1,1 @@
+import {NextResponse} from 'next/server';import {getCampaigns} from '@/lib/campaigns';export async function GET(){return NextResponse.json({campaigns:await getCampaigns()},{headers:{'Cache-Control':'no-store'}})}

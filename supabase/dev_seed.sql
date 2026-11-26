@@ -1,0 +1,7 @@
+-- DEVELOPMENT ONLY. These are fictional sample campaigns, not real beneficiary appeals.
+insert into public.campaigns(title,slug,short_description,description,cover_image_url,category,fundraising_goal,currency,deadline,beneficiary_name,beneficiary_description,status,published_at)
+values
+('Demo: School reading corner','demo-school-reading-corner','A sample campaign for books and a welcoming place to read.','This fictional development campaign demonstrates how education appeals appear on the public site. It does not represent a real school or beneficiary.',null,'Education',180000,'KES',current_date+45,'Demo beneficiary','Fictional sample details for development only.','active',now()),
+('Demo: Community clinic supplies','demo-community-clinic-supplies','A sample appeal for essential community health supplies.','This fictional campaign is provided to preview the campaign experience during development. It is not collecting funds for a real clinic.',null,'Health',350000,'KES',current_date+60,'Demo beneficiary','Fictional sample details for development only.','active',now()),
+('Demo: Clean water point','demo-clean-water-point','A sample community project for a dependable water point.','This fictional campaign is for visual and interaction testing only. It is not a real project and must not be represented as an active appeal.',null,'Community',500000,'KES',current_date+75,'Demo beneficiary','Fictional sample details for development only.','active',now())
+on conflict(slug) do nothing;
