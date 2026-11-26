@@ -2,6 +2,8 @@ import Link from 'next/link';
 import {getCampaigns} from '@/lib/campaigns';
 import {money} from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home(){
  const campaigns=(await getCampaigns()).slice(0,4);
  const featured=campaigns[0];
