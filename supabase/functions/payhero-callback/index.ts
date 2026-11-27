@@ -39,7 +39,12 @@ Deno.serve(async (request) => {
   if (donationError) return json({ error: 'Could not look up donation' }, 500);
   if (!donation) return json({ error: 'Unknown reference' }, 404);
 
-  const eventReference = checkoutId || `${referenceId}:${response.ResultCode ?? response.Status ?? 'unknown'}`;
+  const callbackStatus = String(response.Status ?? '').toUpperCase();
+  const callbackDescription = String(response.ResultDesc ?? '').toUpperCase();
+  const callbackWasCancelled = /CANCEL|USER.?REJECT|REQUEST REJECTED BY USER/.test(`${callbackStatus} ${callbackDescription}`);
+  const eventReference = checkoutId
+    ? `${checkoutId}:${response.ResultCode ?? 'unknown'}:${callbackStatus || 'unknown'}`
+    : `${referenceId}:${response.ResultCode ?? 'unknown'}:${callbackStatus || 'unknown'}`;
   const { data: event, error: eventError } = await db
     .from('payment_events')
     .upsert({
@@ -51,6 +56,7 @@ Deno.serve(async (request) => {
         status: response.Status,
         amount: response.Amount,
         resultCode: response.ResultCode,
+        resultDescription: response.ResultDesc,
         checkoutRequestId: checkoutId,
         referenceId,
       },
@@ -79,9 +85,10 @@ Deno.serve(async (request) => {
         || verifiedReference === response.MpesaReceiptNumber);
 
     let nextStatus = donation.payment_status;
+    const verifiedStatus = String(verified.status ?? '').toUpperCase();
     if (valid) nextStatus = 'successful';
-    else if (['FAILED', 'CANCELLED', 'EXPIRED'].includes(String(verified.status ?? '').toUpperCase())) {
-      nextStatus = String(verified.status).toUpperCase() === 'FAILED' ? 'failed' : 'cancelled';
+    else if (['FAILED', 'CANCELLED', 'CANCELED', 'EXPIRED'].includes(verifiedStatus)) {
+      nextStatus = verifiedStatus === 'FAILED' && !callbackWasCancelled ? 'failed' : 'cancelled';
     }
 
     if (nextStatus !== donation.payment_status && donation.payment_status === 'pending') {
