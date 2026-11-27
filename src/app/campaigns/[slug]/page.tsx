@@ -1,6 +1,6 @@
 import {notFound} from 'next/navigation';
 import {getCampaign} from '@/lib/campaigns';
-import {money} from '@/lib/types';
+import {formatEATDate, money} from '@/lib/types';
 import DonationForm from '@/components/donation-form';
 import CopyLink from '@/components/copy-link';
 
@@ -15,5 +15,5 @@ export default async function CampaignPage({params}:{params:Promise<{slug:string
   <p className="campaign-category">{c.category}</p><h1 className="campaign-detail-title">{c.title}</h1><p className="campaign-description">{c.description}</p>
   {c.beneficiary_name&&<section style={{borderTop:'1px solid var(--line)',marginTop:30,paddingTop:12}}><h2>Beneficiary</h2><p><b>{c.beneficiary_name}</b></p></section>}
   <section style={{borderTop:'1px solid var(--line)',marginTop:30,paddingTop:12}}><h2>Share</h2><div className="campaign-actions"><a className="btn light" target="_blank" rel="noreferrer" href={`https://wa.me/?text=${encodeURIComponent(`${c.title} ${url}`)}`}>WhatsApp</a><a className="btn light" target="_blank" rel="noreferrer" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}>Facebook</a><a className="btn light" target="_blank" rel="noreferrer" href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(c.title)}`}>X</a><CopyLink url={url}/></div></section>
- </div><aside><div className="donation-panel"><span className="eyebrow">Campaign progress</span><h2 style={{font: '500 30px Georgia,serif',margin:'12px 0 4px'}}>{money(c.raised||0)}</h2><p className="muted" style={{marginTop:0}}>raised of {money(c.fundraising_goal)}</p><div className="progress"><span style={{width:`${pct}%`}}/></div><p className="campaign-meta"><b>{pct}% funded</b>{c.deadline&&<span>Closes {new Date(c.deadline).toLocaleDateString('en-KE')}</span>}</p><div style={{borderTop:'1px solid var(--line)',marginTop:22,paddingTop:20}} id="donate"><DonationForm campaignId={c.id} campaignTitle={c.title} paymentEnabled={mpesaEnabled}/></div></div></aside></div></main>
+ </div><aside><div className="donation-panel"><span className="eyebrow">Campaign progress</span><h2 style={{font: '500 30px Georgia,serif',margin:'12px 0 4px'}}>{money(c.raised||0)}</h2><p className="muted" style={{marginTop:0}}>raised of {money(c.fundraising_goal)}</p><div className="progress"><span style={{width:`${pct}%`}}/></div><p className="campaign-meta"><b>{pct}% funded</b>{c.deadline&&<span>Closes {formatEATDate(c.deadline)}</span>}</p><div style={{borderTop:'1px solid var(--line)',marginTop:22,paddingTop:20}} id="donate"><DonationForm campaignId={c.id} campaignTitle={c.title} paymentEnabled={mpesaEnabled}/></div></div></aside></div></main>
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { requireAdmin } from '@/lib/supabase/auth';
 import { supabaseAdmin } from '@/lib/supabase/server';
-import { money } from '@/lib/types';
+import { formatEATDateTime, money } from '@/lib/types';
 import AdminLogin from '@/components/admin-login';
 import AdminCampaignForm from '@/components/admin-campaign-form';
 import CampaignStatusControl from '@/components/campaign-status-control';
@@ -125,7 +125,7 @@ export default async function Admin() {
                   <span className={`admin-status admin-status-${donation.payment_status}`}>{donation.payment_status}</span>
                   <strong>{money(Number(donation.amount), donation.currency)}</strong>
                   <span>{donation.donor_name}</span>
-                  <small>{campaign?.title || 'Campaign'} · {new Date(donation.created_at).toLocaleString('en-KE')}</small>
+                  <small>{campaign?.title || 'Campaign'} · {formatEATDateTime(donation.created_at)}</small>
                   <code>{donation.payment_reference}</code>
                 </div>
                 {donation.payment_status === 'pending' && donation.payment_provider === 'payhero' && <div className="admin-payment-actions">

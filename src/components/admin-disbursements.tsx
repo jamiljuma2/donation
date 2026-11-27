@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { formatEATDateTime } from '@/lib/types';
 
 type Campaign = { id: string; title: string };
 type Disbursement = {
@@ -99,7 +100,7 @@ export default function AdminDisbursements({ campaigns }: { campaigns: Campaign[
         <div className="admin-disbursement-summary">
           <span className={`admin-status admin-status-${item.status}`}>{item.status}</span>
           <h3>{item.beneficiary_name} · KSh {Number(item.amount).toLocaleString('en-KE')}</h3>
-          <p className="muted">{campaigns.find((campaign) => campaign.id === item.campaign_id)?.title || 'Campaign'} · {new Date(item.requested_at).toLocaleString('en-KE')}</p>
+          <p className="muted">{campaigns.find((campaign) => campaign.id === item.campaign_id)?.title || 'Campaign'} · {formatEATDateTime(item.requested_at)}</p>
           <p>{item.purpose}</p>
         </div>
         {item.status === 'pending' && <div className="admin-actions">

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import PrintReceipt from '@/components/print-receipt';
-import { money } from '@/lib/types';
+import { formatEATDateTime, money } from '@/lib/types';
 import { supabaseAdmin } from '@/lib/supabase/server';
 
 export default async function Receipt({ params }: { params: Promise<{ id: string }> }) {
@@ -31,7 +31,7 @@ export default async function Receipt({ params }: { params: Promise<{ id: string
         <div><dt>Donor</dt><dd>{donation.donor_name}</dd></div>
         <div><dt>Amount</dt><dd>{money(Number(donation.amount), donation.currency)}</dd></div>
         <div><dt>Payment status</dt><dd>Verified successful</dd></div>
-        <div><dt>Date</dt><dd>{new Date(donation.created_at).toLocaleString('en-KE')}</dd></div>
+        <div><dt>Date (EAT)</dt><dd>{formatEATDateTime(donation.created_at)}</dd></div>
       </dl>
       <p className="receipt-note">This receipt confirms a payment recorded by the platform. It is not a statement that a donation is tax deductible.</p>
     </article>

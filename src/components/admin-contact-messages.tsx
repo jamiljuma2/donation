@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { formatEATDateTime } from '@/lib/types';
 
 type Message = {
   id: string;
@@ -67,7 +68,7 @@ export default function AdminContactMessages() {
             <article className="admin-message" key={message.id}>
               <div className="admin-message-top">
                 <div><span className={`admin-status admin-status-${message.status}`}>{message.status}</span><h3>{message.subject}</h3></div>
-                <time dateTime={message.created_at}>{new Date(message.created_at).toLocaleString('en-KE')}</time>
+                <time dateTime={message.created_at}>{formatEATDateTime(message.created_at)}</time>
               </div>
               <p className="admin-message-sender"><b>{message.name}</b> · <a href={`mailto:${message.email}`}>{message.email}</a></p>
               <p className="admin-message-body">{message.message}</p>
