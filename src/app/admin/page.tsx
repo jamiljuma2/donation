@@ -38,7 +38,7 @@ export default async function Admin() {
     db.from('donations').select('amount').eq('payment_status', 'successful'),
     db.from('donation_adjustments').select('amount').in('adjustment_type', ['refund', 'chargeback']),
     db.from('campaigns').select('id,title,slug,status,category,fundraising_goal').order('created_at', { ascending: false }).limit(100),
-    db.from('donations').select('id,donor_name,donor_email,amount,currency,payment_status,payment_reference,payment_provider,provider_transaction_id,created_at,campaigns(title)').order('created_at', { ascending: false }).limit(25),
+    db.from('donations').select('id,donor_name,amount,currency,payment_status,payment_reference,payment_provider,provider_transaction_id,created_at,campaigns(title)').order('created_at', { ascending: false }).limit(25),
   ]);
 
   const campaigns = campaignsResult.data || [];
