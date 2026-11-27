@@ -1,2 +1,39 @@
-import {supabaseAdmin} from '@/lib/supabase/server';import{notFound}from'next/navigation';import{money}from'@/lib/types';import Link from'next/link';import PrintReceipt from'@/components/print-receipt';
-export default async function Receipt({params}:{params:Promise<{id:string}>}){const{id}=await params;const db=supabaseAdmin();if(!db)notFound();const{data:d}=await db.from('donations').select('id,donor_name,amount,currency,payment_status,payment_reference,created_at,campaigns(title)').eq('id',id).eq('payment_status','successful').maybeSingle();if(!d)notFound();return <main className="wrap section" style={{maxWidth:700}}><div className="card-body" style={{background:'white',borderRadius:18}}><div className="eyebrow">Donation receipt</div><h1>GiveHope</h1><p>Thank you for supporting {(d.campaigns as unknown as {title:string}|null)?.title}.</p><hr/><p><b>Receipt reference:</b> {d.payment_reference}</p><p><b>Donor:</b> {d.donor_name}</p><p><b>Amount:</b> {money(Number(d.amount),d.currency)}</p><p><b>Payment status:</b> Verified successful</p><p><b>Date:</b> {new Date(d.created_at).toLocaleString('en-KE')}</p><p className="muted">This receipt confirms a payment recorded by the platform. It is not a statement that a donation is tax deductible.</p><PrintReceipt/><Link className="btn light" style={{marginLeft:10}} href="/campaigns">Back to campaigns</Link></div></main>}
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import PrintReceipt from '@/components/print-receipt';
+import { money } from '@/lib/types';
+import { supabaseAdmin } from '@/lib/supabase/server';
+
+export default async function Receipt({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const db = supabaseAdmin();
+  if (!db) notFound();
+
+  const { data: donation } = await db
+    .from('donations')
+    .select('id,donor_name,amount,currency,payment_status,payment_reference,created_at,campaigns(title)')
+    .eq('id', id)
+    .eq('payment_status', 'successful')
+    .maybeSingle();
+  if (!donation) notFound();
+
+  const campaign = donation.campaigns as unknown as { title: string } | null;
+
+  return <main className="wrap section receipt-page" id="receipt-page">
+    <article className="receipt-card" id="receipt-card">
+      <div className="eyebrow">Donation receipt</div>
+      <h1>GiveHope</h1>
+      <p className="receipt-thanks">Thank you for supporting {campaign?.title || 'this campaign'}.</p>
+      <hr/>
+      <dl className="receipt-details">
+        <div><dt>Receipt reference</dt><dd>{donation.payment_reference}</dd></div>
+        <div><dt>Donor</dt><dd>{donation.donor_name}</dd></div>
+        <div><dt>Amount</dt><dd>{money(Number(donation.amount), donation.currency)}</dd></div>
+        <div><dt>Payment status</dt><dd>Verified successful</dd></div>
+        <div><dt>Date</dt><dd>{new Date(donation.created_at).toLocaleString('en-KE')}</dd></div>
+      </dl>
+      <p className="receipt-note">This receipt confirms a payment recorded by the platform. It is not a statement that a donation is tax deductible.</p>
+    </article>
+    <div className="receipt-actions"><PrintReceipt/><Link className="btn light" href="/campaigns">Back to campaigns</Link></div>
+  </main>;
+}
