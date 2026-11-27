@@ -18,10 +18,16 @@ export default function CampaignBrowser({ campaigns }: { campaigns: Campaign[] }
       <div><div className="eyebrow">GiveHope campaign list</div><h1 className="campaign-detail-title" style={{ marginBottom: 8 }}>Campaigns</h1><p className="muted">Review the details and progress before you contribute.</p></div>
     </div>
     <div className="campaign-search">
-      <input aria-label="Search campaigns" className="input" placeholder="Search by campaign name" value={query} onChange={(event) => setQuery(event.target.value)}/>
-      <select aria-label="Filter by category" className="input" value={category} onChange={(event) => setCategory(event.target.value)}>
-        {categories.map((item) => <option key={item} value={item}>{item}</option>)}
-      </select>
+      <div className="campaign-search-field">
+        <label className="label" htmlFor="campaign-search">Search campaigns</label>
+        <input id="campaign-search" className="input" placeholder="Campaign name" value={query} onChange={(event) => setQuery(event.target.value)}/>
+      </div>
+      <div className="campaign-search-field">
+        <label className="label" htmlFor="campaign-category">Category</label>
+        <select id="campaign-category" className="input" value={category} onChange={(event) => setCategory(event.target.value)}>
+          {categories.map((item) => <option key={item} value={item}>{item}</option>)}
+        </select>
+      </div>
     </div>
     {filtered.length ? <div className="grid">
       {filtered.map((campaign) => <article className="card" key={campaign.id}>
