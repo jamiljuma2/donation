@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import PrintReceipt from '@/components/print-receipt';
 import { money } from '@/lib/types';
@@ -22,7 +23,7 @@ export default async function Receipt({ params }: { params: Promise<{ id: string
   return <main className="wrap section receipt-page" id="receipt-page">
     <article className="receipt-card" id="receipt-card">
       <div className="eyebrow">Donation receipt</div>
-      <h1>GiveHope</h1>
+      <Image className="receipt-logo" src="/givehope-logo.svg" alt="GiveHope — Donate, Support, Make an Impact" width={220} height={57} priority/>
       <p className="receipt-thanks">Thank you for supporting {campaign?.title || 'this campaign'}.</p>
       <hr/>
       <dl className="receipt-details">
