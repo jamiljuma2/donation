@@ -12,7 +12,7 @@ export default function Contact(){
  return <main className="contact-page">
   <div className="contact-hero"><div className="eyebrow">GiveHope</div><h1>Contact</h1></div>
   <section className="contact-main">
-   <div className="contact-heading"><div className="eyebrow">Support</div><h2>We’re here to help</h2></div>
+   <div className="contact-heading"><h2>We’re here to help</h2></div>
    <div className="contact-grid">
     <aside className="contact-help"><div className="eyebrow">Before you write</div><h3>What can we help with?</h3><p>Ask about a campaign, a donation, or a payment status.</p><div className="contact-help-note"><b>Payment question?</b><br/>Include your donation reference. Never send your M-Pesa PIN.</div></aside>
     <form onSubmit={send} className="contact-form">
