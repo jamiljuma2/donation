@@ -25,7 +25,7 @@ button{cursor:pointer}
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}
 .section h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:500;letter-spacing:-.025em;margin:8px 0}
 .hero{padding:74px 0 66px;border-bottom:1px solid var(--line)}
-.hero-inner{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);gap:72px;align-items:center}
+.hero-inner{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(32px,4vw,52px);align-items:center}
 .hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(43px,5.5vw,72px);font-weight:500;line-height:1.02;letter-spacing:-.045em;margin:18px 0 20px;max-width:700px}
 .hero-highlight{color:var(--green);position:relative;display:inline-block}
 .hero-highlight::after{content:"";position:absolute;left:0;right:8%;bottom:-5px;height:5px;background:var(--orange);transform:skewX(-18deg);opacity:.9}
